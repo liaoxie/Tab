@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+		<style>
+			#app{
+				height: 300px;
+			}
+		  .contentall {
+		    margin: 0 auto;
+		    display: flex;
+		    /* justify-content: space-aro */
+		    flex-wrap: wrap;
+		
+		  }
+		
+		  .textall {
+		    /* margin: 30px 0; */
+		    width: 270px !important;
+		    /* height: 80px; */
+		    padding: 20px 10px;
+		    margin-right: 12px;
+		    background: #fff;
+		    display: flex;
+		    justify-content: space-between;
+		    align-items: center;
+		    overflow: hidden;
+		    margin-bottom: 26px;
+		    border: 1px solid rgba(216, 216, 216, 0.3);
+		  }
+		  .img img {
+		    width: 50px;
+		    height: 50px;
+		    display: flex;
+		    align-items: center;
+		    padding-right: 20px;
+		  }
+		
+		  .left {
+		    display: flex;
+		    align-items: center;
+		  }
+		
+		  .t {
+		    color: #957f64;
+		    font-size: 14px;
+		  }
+		
+		  .text2 {
+		    color: #676767;
+		    font-size: 12px;
+		  }
+		.t1{
+		  height: 50px;
+		  width: 40px;
+		  color:#4b434e
+		}
+		  .right{
+		    display: flex;
+		    flex-direction: column;
+		    align-content: space-between;
+		    font-size: 10px;
+		    align-items: flex-start;
+		    height: 100%;
+		  }
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<div>
+				
+				 <el-tabs v-model="activeName"  @tab-click="handleClick" clientHeight="300px" tab-position="right">
+				    <el-tab-pane label="用户管理" name="first" >
+						<div id="">
+						  <el-table
+						      :data="tableData"
+						      style="width: 100%" height="400">
+						      <el-table-column
+						        prop="productCategory"
+						        label="所属品类"
+						        width="80">
+						      </el-table-column>
+						      <el-table-column
+						        prop="prjCategory"
+						        label="项目类别"
+						        width="100">
+						      </el-table-column>
+						      <el-table-column
+						        prop="taskCount"
+						        label="项目编号"
+								width="78">
+						      </el-table-column>
+							  <el-table-column
+							    prop="prjName"
+							    label="项目名称"
+								width="200">
+							  </el-table-column>
+							  <el-table-column
+							    prop="address"
+							    label="项目状态"
+								width="80">
+							  </el-table-column>
+							  <el-table-column
+							    prop="prjManager"
+							    label="项目经理"
+								width="180">
+							  </el-table-column>
+							  <el-table-column
+							    prop="department"
+							    label="所属部门"
+								width="100">
+							  </el-table-column>
+							  <el-table-column
+							    prop="prjStartDate"
+							    label="项目计划时间">
+							  </el-table-column>
+						    </el-table>
+						</div>
+					</el-tab-pane>
+				    <el-tab-pane label="配置管理" name="second">
+						<div class="all">
+						    <section class="contentall" id="demo">
+						        <div v-for="item in tableData" class="textall">
+						          <div class="left">
+						            <div class="img">
+						              <img :src="item.logo" alt="">
+						            </div>
+						            <div class="text">
+						              <div class="t">{{item.prjName}}</div>
+						              <div class="text2">项目经理:{{item.prjManager}}</div>
+						              <div class="text2">立项时间:{{item.prjStartDate}}</div>
+						              <div class="text2">任务：{{item.taskCount}} &nbsp;完成：{{item.taskDoneCount}} &nbsp;进行:{{item.taskDoingCount}}</div>
+						            </div>
+						          </div>
+						          <div class="right">
+						            <div class="t1">进行中 </div>
+						            <div class="t2">星星</div>
+						          </div>
+						        </div>
+						      </section>
+						</div>
+					</el-tab-pane>
+				  </el-tabs>
+			</div>
+			
+		</div>
+	</body>
+	
+	<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+	<script src="https://cdn.bootcss.com/axios/0.19.0/axios.js"></script>
+	<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+	<script>
+		var vm = new Vue({
+			el:'#app',
+			data:{
+				activeName: 'second',
+                tableData: [{
+                      "productCategory": "家教机",
+                        "prjCategory": "教育电子软件产品开发项目",
+                        "prjName": "测试项目密码",
+                        "prjManager": "孙工",
+                        "prjStartDate": "2018-08-04 18:34:58",
+                        "prjEndDate": "2018-08-28 18:34:58",
+                        "guid": "a6d6e2d1-ea1f-47de-aec7-4397bc74bfcd",
+                        "projectStatus": "processing",
+                        "department": "系统管理部",
+                        "logo": "image.png",
+                        "taskCount": 0,
+                        "taskDoneCount": 0,
+                        "taskDoingCount": 0
+                      },
+                      {
+                        "productCategory": "电话手表",
+                        "prjCategory": "电话手表产品开发项目",
+                        "prjName": "集成测试0712",
+                        "prjManager": "孙工,郑工",
+                        "prjStartDate": "2018-08-04 18:34:58",
+                        "prjEndDate": "2018-08-28 18:34:58",
+                        "guid": "4be3d93b-b901-462d-b87e-d17548597ab6",
+                        "projectStatus": "processing",
+                        "department": "系统管理部",
+                        "logo": "image.png",
+                        "taskCount": 0,
+                        "taskDoneCount": 0,
+                        "taskDoingCount": 0
+                      },
+                      {
+                        "productCategory": "其他",
+                        "prjCategory": "IT项目",
+                        "prjName": "testRead",
+                        "prjManager": "孙工",
+                        "prjStartDate": "2018-08-06 20:56:23",
+                        "prjEndDate": "2018-08-31 20:56:23",
+                        "guid": "0508420c-ecc4-4cc3-9b21-3b5256874221",
+                        "projectStatus": "approving",
+                        "department": "系统管理部",
+                        "logo": "image.png",
+                        "taskCount": null,
+                        "taskDoneCount": null,
+                        "taskDoingCount": null
+                      },
+                      {
+                        "productCategory": "其他",
+                        "prjCategory": "产品预研项目",
+                        "prjName": "任务直接完成",
+                        "prjManager": "孙工",
+                        "prjStartDate": "2018-07-30 16:40:03",
+                        "prjEndDate": "2018-07-30 16:40:03",
+                        "guid": "b4fdc9d4-dc8a-4190-b16c-d5c0f3feb379",
+                        "projectStatus": "processing",
+                        "department": "系统管理部",
+                        "logo": "image.png",
+                        "taskCount": 14,
+                        "taskDoneCount": 13,
+                        "taskDoingCount": 1
+                      },
+                      {
+                        "productCategory": "其他",
+                        "prjCategory": "测试",
+                        "prjName": "aab1216",
+                        "prjManager": "孙工",
+                        "prjStartDate": "2018-07-30 16:40:03",
+                        "prjEndDate": "2018-07-30 16:40:03",
+                        "guid": "c6ae03d5-b90b-41da-9103-7463fa61a6f3",
+                        "projectStatus": "processing",
+                        "department": "系统管理部",
+                        "logo": "image.png",
+                        "taskCount": 1,
+                        "taskDoneCount": 0,
+                        "taskDoingCount": 1
+                      }],
+
+			},
+			 methods: {
+			      handleClick(tab, event) {
+			        console.log(tab, event);
+			      }
+			    },
+			// created() {
+			// 	const axios = require('axios');
+			// 	axios.get('/user?ID=12345')
+			// 	  .then(function (response) {
+			// 	    // handle success
+			// 	    console.log(response);
+			// 	  })
+			// 	  .catch(function (error) {
+			// 	    // handle error
+			// 	    console.log(error);
+			// 	  })
+			// 	  .then(function () {
+			// 	    // always executed
+			// 	  });
+			// }
+		})
+	</script>
+</html>
